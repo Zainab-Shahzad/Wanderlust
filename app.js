@@ -5,6 +5,7 @@ if(process.env.NODE_ENV != "production") {
 
 const express = require('express');
 const app = express();
+const PORT = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 const path = require('path');
 const methodOverride = require('method-override');
@@ -89,7 +90,7 @@ app.use('/listings/:id/reviews', reviewRouter);
 app.use('/', userRouter);
 
 app.get('/', (req, res) => {
-    res.redirect('/listings');
+    res.send('root is working');
 });
 
 
@@ -103,6 +104,6 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("error.ejs", { message });
 });
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
     console.log("app is listening to server");
 });
